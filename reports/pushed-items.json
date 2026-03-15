@@ -1,0 +1,30 @@
+{
+  "lastPush": "2026-03-16T02:30:00+08:00",
+  "items": [
+    {
+      "id": "hot-news-2026-03-16-0230",
+      "title": "热点资讯 Top 10 - 2026 年 3 月 16 日 02:30",
+      "timestamp": "2026-03-16T02:30:00+08:00",
+      "mdFile": "hot-news-daily-2026-03-16-0230.md",
+      "htmlFile": "hot-news-daily-2026-03-16-0230.html",
+      "categories": {
+        "ai": 5,
+        "energy": 3,
+        "finance": 1,
+        "politics": 1
+      },
+      "sources": {
+        "xPlatform": "40%",
+        "newsMinimalist": "30%",
+        "googleSearch": "20%",
+        "youtube": "skipped"
+      },
+      "topStories": [
+        "中国五年计划锁定 AI 和科技领导地位 (6.7)",
+        "中国批准全球首例商业化脑机接口 (6.2)",
+        "NASA DART 任务成功改变小行星轨道 (6.4)"
+      ]
+    }
+  ],
+  "totalPushes": 1
+}
