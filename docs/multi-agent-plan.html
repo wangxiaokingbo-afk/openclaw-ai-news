@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多智能机器人协作系统配置方案</title>
+    <style>
+        :root {
+            --primary: #0089FF;
+            --success: #00C853;
+            --warning: #FFB300;
+            --danger: #FF5252;
+            --bg: #F5F7FA;
+            --card-bg: #FFFFFF;
+            --text: #1F2D3D;
+            --text-light: #5E6D82;
+            --border: #E4E7ED;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary), #00C6FB);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 137, 255, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .card h2 {
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .card h3 {
+            color: var(--text);
+            font-size: 16px;
+            margin: 20px 0 12px;
+        }
+        
+        .conclusion {
+            background: linear-gradient(135deg, #E3F2FD, #E8F5E9);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        
+        .conclusion h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        .conclusion ul {
+            list-style: none;
+        }
+        
+        .conclusion li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .conclusion li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        
+        .architecture {
+            background: #FAFAFA;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: "Monaco", "Consolas", monospace;
+            font-size: 13px;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        .step {
+            background: #FAFAFA;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .code-block {
+            background: #282C34;
+            color: #ABB2BF;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: "Monaco", "Consolas", monospace;
+            font-size: 13px;
+            margin: 15px 0;
+        }
+        
+        .code-block .comment { color: #5C6370; }
+        .code-block .string { color: #98C379; }
+        .code-block .keyword { color: #C678DD; }
+        .code-block .function { color: #61AFEF; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        th {
+            background: #FAFAFA;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        tr:hover {
+            background: #FAFAFA;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .tag-easy { background: #E8F5E9; color: #2E7D32; }
+        .tag-medium { background: #FFF3E0; color: #EF6C00; }
+        .tag-hard { background: #FFEBEE; color: #C62828; }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+        
+        .copy-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 多智能机器人协作系统配置方案</h1>
+            <p>创建时间：2026-03-08 | 适用场景：工作/生活/技术多领域协作</p>
+        </div>
+        
+        <div class="card">
+            <div class="conclusion">
+                <h3>📌 核心结论</h3>
+                <ul>
+                    <li><strong>推荐方案一（轻量级）</strong> - 使用 OpenClaw 子 Agent，10 分钟即可搭建完成</li>
+                    <li><strong>3 个基础角色</strong> - 工作助手📊、生活助手🏠、技术专家💻</li>
+                    <li><strong>共享记忆</strong> - 通过钉钉 AI 表格实现状态同步和任务追踪</li>
+                    <li><strong>可扩展</strong> - 后续可按需增加新角色，不影响现有架构</li>
+                </ul>
+            </div>
+            
+            <h2>📐 系统架构</h2>
+            <div class="architecture">
+┌─────────────────────────────────────────────────────────────┐
+│                    主协调器 (小橙 🍊)                        │
+│         负责任务分发、进度跟踪、结果汇总                      │
+└─────────────────────────────────────────────────────────────┘
+                              │
+        ┌─────────────────────┼─────────────────────┐
+        ▼                     ▼                     ▼
+┌───────────────┐    ┌───────────────┐    ┌───────────────┐
+│  工作助手     │    │  生活助手     │    │  技术专家     │
+│  work-agent   │    │  life-agent   │    │  tech-agent   │
+│  📊           │    │  🏠           │    │  💻           │
+└───────────────┘    └───────────────┘    └───────────────┘
+                              │
+                              ▼
+                    ┌───────────────────┐
+                    │   钉钉 AI 表格      │
+                    │   (共享记忆)       │
+                    └───────────────────┘
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🚀 方案一：轻量级（推荐）</h2>
+            
+            <h3><span class="step-number">1</span>创建 Agent 配置文件</h3>
+            <div class="code-block">
+<span class="comment"># 创建 agents 目录</span>
+mkdir -p ~/.openclaw/workspace/agents
+
+<span class="comment"># 创建工作助手配置</span>
+cat > ~/.openclaw/workspace/agents/work-agent.md << 'EOF'
+<span class="comment"># 工作助手 (work-agent)</span>
+
+<span class="comment">## 角色定位</span>
+- 专业领域：项目管理、会议安排、文档处理、邮件沟通
+- 性格：严谨、高效、结果导向
+- Emoji: 📊
+
+<span class="comment">## 核心技能</span>
+- dingtalk_calendar - 日程管理
+- dingtalk_docs - 文档处理
+- summarize - 会议纪要
+- github - 代码协作
+
+<span class="comment">## 响应风格</span>
+- 简洁、专业、带行动项
+- 优先使用表格和列表
+- 重要事项主动提醒
+EOF
+            </div>
+            
+            <h3><span class="step-number">2</span>创建协调器脚本</h3>
+            <div class="code-block">
+<span class="comment"># 创建 coordinator.py</span>
+cat > ~/.openclaw/workspace/scripts/coordinator.py << 'EOF'
+#!/usr/bin/env python3
+<span class="comment">"""多 Agent 协作协调器"""</span>
+
+<span class="keyword">class</span> <span class="function">AgentCoordinator</span>:
+    <span class="keyword">def</span> <span class="function">spawn_agent</span>(self, agent_name, task):
+        <span class="comment"># 启动子 agent</span>
+        cmd = ["openclaw", "sessions", "spawn", 
+               "--runtime", "subagent",
+               "--label", agent_name,
+               "--task", task]
+        
+    <span class="keyword">def</span> <span class="function">send_to_agent</span>(self, agent_label, message):
+        <span class="comment"># 发送消息到指定 agent</span>
+        cmd = ["openclaw", "sessions", "send",
+               "--label", agent_label,
+               "--message", message]
+EOF
+            </div>
+            
+            <h3><span class="step-number">3</span>创建快捷命令</h3>
+            <div class="code-block">
+<span class="comment"># 添加到 ~/.zshrc</span>
+<span class="comment"># 向工作助手发送任务</span>
+<span class="keyword">alias</span> work=<span class="string">'openclaw sessions send --label work-agent --message'</span>
+
+<span class="comment"># 向生活助手发送任务</span>
+<span class="keyword">alias</span> life=<span class="string">'openclaw sessions send --label life-agent --message'</span>
+
+<span class="comment"># 向技术专家发送任务</span>
+<span class="keyword">alias</span> tech=<span class="string">'openclaw sessions send --label tech-agent --message'</span>
+
+<span class="comment"># 查看 agent 状态</span>
+<span class="keyword">alias</span> agents-status=<span class="string">'openclaw subagents list --action list'</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>⚡ 方案二：进阶版（ACP Harness）</h2>
+            
+            <table>
+                <tr>
+                    <th>特性</th>
+                    <th>方案一</th>
+                    <th>方案二</th>
+                </tr>
+                <tr>
+                    <td>复杂度</td>
+                    <td><span class="tag tag-easy">简单</span></td>
+                    <td><span class="tag tag-medium">中等</span></td>
+                </tr>
+                <tr>
+                    <td>代码能力</td>
+                    <td>基础</td>
+                    <td>强大 (Codex/Claude)</td>
+                </tr>
+                <tr>
+                    <td>启动时间</td>
+                    <td>~10 分钟</td>
+                    <td>~30 分钟</td>
+                </tr>
+                <tr>
+                    <td>适用场景</td>
+                    <td>日常协作</td>
+                    <td>复杂项目</td>
+                </tr>
+            </table>
+            
+            <h3>创建 ACP 会话</h3>
+            <div class="code-block">
+<span class="comment"># 技术专家（使用 ACP，适合代码任务）</span>
+openclaw sessions spawn \
+  --runtime acp \
+  --agentId codex \
+  --mode session \
+  --label tech-agent \
+  --task <span class="string">"资深技术专家，擅长代码审查、架构设计"</span> \
+  --thread true
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>📊 任务管理表格</h2>
+            
+            <h3>钉钉 AI 表格字段设计</h3>
+            <table>
+                <tr>
+                    <th>字段名</th>
+                    <th>类型</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>任务 ID</td>
+                    <td>文本</td>
+                    <td>唯一标识，如 TASK-001</td>
+                </tr>
+                <tr>
+                    <td>任务描述</td>
+                    <td>文本</td>
+                    <td>任务详细说明</td>
+                </tr>
+                <tr>
+                    <td>负责 Agent</td>
+                    <td>多选</td>
+                    <td>work/life/tech-agent</td>
+                </tr>
+                <tr>
+                    <td>状态</td>
+                    <td>单选</td>
+                    <td>待处理/进行中/已完成</td>
+                </tr>
+                <tr>
+                    <td>优先级</td>
+                    <td>单选</td>
+                    <td>低/中/高/紧急</td>
+                </tr>
+                <tr>
+                    <td>进度</td>
+                    <td>文本</td>
+                    <td>百分比或文字描述</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="card">
+            <h2>💡 使用示例</h2>
+            
+            <h3>单 Agent 任务</h3>
+            <div class="code-block">
+<span class="comment"># 工作助手 - 安排会议</span>
+work <span class="string">"帮我安排下周的项目评审会议"</span>
+
+<span class="comment"># 生活助手 - 查询天气</span>
+life <span class="string">"周末上海天气怎么样？适合出游吗？"</span>
+
+<span class="comment"># 技术专家 - 代码审查</span>
+tech <span class="string">"帮我 review 一下这个 PR 的代码质量"</span>
+            </div>
+            
+            <h3>多 Agent 协作</h3>
+            <div class="code-block">
+<span class="comment"># 场景：准备季度技术报告</span>
+<span class="comment"># 1. tech-agent 收集技术指标</span>
+<span class="comment"># 2. work-agent 整理报告格式</span>
+<span class="comment"># 3. tech-agent 撰写技术内容</span>
+<span class="comment"># 4. work-agent 最终审核发送</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🔧 维护建议</h2>
+            <ul>
+                <li><strong>每周清理</strong> - 检查并关闭不活跃的子 agent</li>
+                <li><strong>记忆整理</strong> - 定期合并共享记忆中的重复信息</li>
+                <li><strong>权限审查</strong> - 定期检查各 agent 的 API 权限</li>
+                <li><strong>性能监控</strong> - 观察 token 使用情况，优化提示词</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>📁 文件位置：~/.openclaw/workspace/docs/multi-agent-plan.html</p>
+            <p>由 小橙 🍊 整理 | 2026-03-08</p>
+        </div>
+    </div>
+    
+    <script>
+        // 一键复制代码块
+        document.querySelectorAll('.code-block').forEach(block => {
+            const btn = document.createElement('button');
+            btn.className = 'copy-btn';
+            btn.textContent = '📋 复制代码';
+            btn.onclick = () => {
+                navigator.clipboard.writeText(block.textContent);
+                btn.textContent = '✅ 已复制';
+                setTimeout(() => btn.textContent = '📋 复制代码', 2000);
+            };
+            block.parentNode.insertBefore(btn, block.nextSibling);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+# OpenClaw 钉钉稳定性定时任务
+# 配置方法：crontab -e 然后粘贴以下内容
+
+# ==================== 钉钉稳定性任务 ====================
+
+# 每 10 分钟探活检查（检测真实连接故障）
+*/10 * * * * /Users/ssd/.openclaw/workspace/scripts/dingtalk-keepalive.sh
+
+# 每 3 小时定时刷新（预防性重启，避免长连接老化）
+0 */3 * * * /Users/ssd/.openclaw/workspace/scripts/dingtalk-refresh.sh
+
+# 每天凌晨 3 点生成诊断报告
+0 3 * * * /Users/ssd/.openclaw/workspace/scripts/dingtalk-diagnose.sh >> /tmp/openclaw/dingtalk-diagnose.log 2>&1
+
+# ==================== 热点资讯推送任务 ====================
+
+# 每天 09:00 热点资讯推送（早报）
+0 9 * * * /Users/ssd/.openclaw/workspace/scripts/hot-news-push.sh >> /tmp/openclaw/hot-news-push.log 2>&1
+
+# 每天 12:00 热点资讯推送（午报）
+0 12 * * * /Users/ssd/.openclaw/workspace/scripts/hot-news-push.sh >> /tmp/openclaw/hot-news-push.log 2>&1
+
+# 每天 18:00 热点资讯推送（晚报）
+0 18 * * * /Users/ssd/.openclaw/workspace/scripts/hot-news-push.sh >> /tmp/openclaw/hot-news-push.log 2>&1
+
+# 每天 23:00 热点资讯推送（夜报）
+0 23 * * * /Users/ssd/.openclaw/workspace/scripts/hot-news-push.sh >> /tmp/openclaw/hot-news-push.log 2>&1

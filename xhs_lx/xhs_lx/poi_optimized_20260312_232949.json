@@ -1,0 +1,122 @@
+[
+  {
+    "poi_name": "新疆了😭真",
+    "city": "新疆",
+    "province": "",
+    "poi_type": "其他",
+    "heat_score": 2805.0,
+    "source_text": "已经开始期待五月的新疆了😭真的太美了",
+    "source_type": "post_title",
+    "confidence": 0.8
+  },
+  {
+    "poi_name": "以选择特克斯县的民宿",
+    "city": "未知",
+    "province": "",
+    "poi_type": "住宿",
+    "heat_score": 2805.0,
+    "source_text": "五月的伊犁草原真的太美了，推荐大家去那拉提和喀拉峻。住宿可以选择特克斯县的民宿，很有特色。",
+    "source_type": "post_content",
+    "confidence": 0.6
+  },
+  {
+    "poi_name": "赛里木湖",
+    "city": "未知",
+    "province": "",
+    "poi_type": "景点",
+    "heat_score": 28.0,
+    "source_text": "赛里木湖也超美！强烈推荐",
+    "source_type": "comment",
+    "confidence": 0.6
+  },
+  {
+    "poi_name": "喀什古城",
+    "city": "未知",
+    "province": "",
+    "poi_type": "景点",
+    "heat_score": 22.0,
+    "source_text": "喀什古城也值得一去，很有异域风情",
+    "source_type": "comment",
+    "confidence": 0.6
+  },
+  {
+    "poi_name": "南昌万达茂的融创乐园",
+    "city": "未知",
+    "province": "",
+    "poi_type": "景点",
+    "heat_score": 15.0,
+    "source_text": "南昌万达茂的融创乐园好玩吗？",
+    "source_type": "comment",
+    "confidence": 0.6
+  },
+  {
+    "poi_name": "三亚｜爱一万次海边",
+    "city": "三亚",
+    "province": "",
+    "poi_type": "景点",
+    "heat_score": 5279.0,
+    "source_text": "三亚｜爱一万次海边的日落",
+    "source_type": "post_title",
+    "confidence": 0.8
+  },
+  {
+    "poi_name": "三亚｜爱一万次海",
+    "city": "三亚",
+    "province": "",
+    "poi_type": "景点",
+    "heat_score": 5279.0,
+    "source_text": "三亚｜爱一万次海边的日落",
+    "source_type": "post_title",
+    "confidence": 0.8
+  },
+  {
+    "poi_name": "三亚的海真的看不腻",
+    "city": "三亚",
+    "province": "",
+    "poi_type": "景点",
+    "heat_score": 5279.0,
+    "source_text": "三亚的海真的看不腻！这次住了海棠湾的亚特兰蒂斯，水族馆超棒。还去了亚龙湾和蜈支洲岛。",
+    "source_type": "post_content",
+    "confidence": 0.6
+  },
+  {
+    "poi_name": "三亚的海",
+    "city": "三亚",
+    "province": "",
+    "poi_type": "景点",
+    "heat_score": 5279.0,
+    "source_text": "三亚的海真的看不腻！这次住了海棠湾的亚特兰蒂斯，水族馆超棒。还去了亚龙湾和蜈支洲岛。",
+    "source_type": "post_content",
+    "confidence": 0.6
+  },
+  {
+    "poi_name": "海棠湾免税店",
+    "city": "未知",
+    "province": "",
+    "poi_type": "景点",
+    "heat_score": 45.0,
+    "source_text": "海棠湾免税店具体位置在哪里？",
+    "source_type": "comment",
+    "confidence": 0.6
+  },
+  {
+    "poi_name": "龙湾的丽思卡尔顿酒店",
+    "city": "未知",
+    "province": "",
+    "poi_type": "住宿",
+    "heat_score": 38.0,
+    "source_text": "亚龙湾的丽思卡尔顿酒店怎么样？值得住吗？",
+    "source_type": "comment",
+    "confidence": 0.6
+  },
+  {
+    "poi_name": "大东海",
+    "city": "未知",
+    "province": "",
+    "poi_type": "景点",
+    "heat_score": 18.0,
+    "source_text": "推荐去大东海，人少景美",
+    "source_type": "comment",
+    "confidence": 0.6
+  }
+]

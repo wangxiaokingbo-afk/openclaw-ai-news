@@ -1,0 +1,74 @@
+[
+  {
+    "poi_name": "已经开始期待五月的新疆了真的太美了",
+    "poi_address": "",
+    "city": "新疆",
+    "heat": 3245.0,
+    "source_post": "已经开始期待五月的新疆了😭真的太美了",
+    "has_intent": true
+  },
+  {
+    "poi_name": "第一次坐香港直达南昌的高铁被震惊到了",
+    "poi_address": "",
+    "city": "香港",
+    "heat": 7755.0,
+    "source_post": "第一次坐香港直达南昌的高铁，被震惊到了",
+    "has_intent": true
+  },
+  {
+    "poi_name": "一些济州岛的照片 _",
+    "poi_address": "",
+    "city": "济州岛",
+    "heat": 4215.0,
+    "source_post": "一些济州岛的照片 (^_^)",
+    "has_intent": true
+  },
+  {
+    "poi_name": "新西兰不愧是兵家不争之地",
+    "poi_address": "",
+    "city": "新西兰",
+    "heat": 11420.0,
+    "source_post": "新西兰不愧是兵家不争之地🇳🇿",
+    "has_intent": true
+  },
+  {
+    "poi_name": "就去不够呢？！！ 海",
+    "poi_address": "",
+    "city": "未知",
+    "heat": 785.0,
+    "source_post": "海边怎么就去不够呢？！！",
+    "has_intent": true
+  },
+  {
+    "poi_name": "鼋头渚樱花今日实况",
+    "poi_address": "",
+    "city": "鼋头渚",
+    "heat": 2671.0,
+    "source_post": "鼋头渚樱花今日实况，附保姆级攻略",
+    "has_intent": true
+  },
+  {
+    "poi_name": "鼋头渚樱花今日实况附保姆级攻略",
+    "poi_address": "",
+    "city": "鼋头渚",
+    "heat": 2671.0,
+    "source_post": "鼋头渚樱花今日实况，附保姆级攻略",
+    "has_intent": true
+  },
+  {
+    "poi_name": "三亚爱一万次海边的日落",
+    "poi_address": "",
+    "city": "三亚",
+    "heat": 6499.0,
+    "source_post": "三亚｜爱一万次海边的日落",
+    "has_intent": true
+  },
+  {
+    "poi_name": "吉隆坡双子塔东南亚旅游 吉隆坡双子塔 ",
+    "poi_address": "",
+    "city": "吉隆坡",
+    "heat": 5885.0,
+    "source_post": "吉隆坡双子塔#东南亚旅游 #吉隆坡双子塔 #",
+    "has_intent": true
+  }
+]

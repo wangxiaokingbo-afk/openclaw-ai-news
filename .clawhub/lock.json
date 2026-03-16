@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "skills": {
+    "openclaw-tavily-search": {
+      "version": "0.1.0",
+      "installedAt": 1772962034845
+    },
+    "find-skills": {
+      "version": "0.1.0",
+      "installedAt": 1772962898527
+    },
+    "skill-vetting": {
+      "version": "1.1.0",
+      "installedAt": 1772963376573
+    },
+    "summarize": {
+      "version": "1.0.0",
+      "installedAt": 1772963383867
+    },
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1772963391452
+    },
+    "using-superpowers": {
+      "version": "0.1.0",
+      "installedAt": 1772963399970
+    },
+    "agent-browser": {
+      "version": "0.2.0",
+      "installedAt": 1772963405470
+    },
+    "self-improving": {
+      "version": "1.2.10",
+      "installedAt": 1772963417344
+    },
+    "dingtalk-ai-table": {
+      "version": "0.4.0",
+      "installedAt": 1772973433115
+    },
+    "upload-files-to-get-online-url": {
+      "version": "1.0.0",
+      "installedAt": 1772974981072
+    },
+    "github-pages-auto-deploy": {
+      "version": "1.0.0",
+      "installedAt": 1772975326032
+    },
+    "apify-ultimate-scraper": {
+      "version": "1.0.1",
+      "installedAt": 1773493055820
+    }
+  }
+}

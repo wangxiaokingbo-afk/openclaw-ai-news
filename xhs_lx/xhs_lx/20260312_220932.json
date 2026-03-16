@@ -1,0 +1,55 @@
+[
+  {
+    "title": "2026 必去的 10 个旅行地📍",
+    "content": "第一个推荐的是杭州西湖，真的太美了！怎么去？地铁 1 号线到龙翔桥站。位置在杭州市中心，交通很方便。",
+    "author": {
+      "name": "旅行达人",
+      "ip_location": "浙江"
+    },
+    "link": "https://www.xiaohongshu.com/explore/abc123",
+    "likes": 15420,
+    "comments_count": 328,
+    "comments": [
+      {
+        "content": "请问具体在哪？求地址！",
+        "likes": 45,
+        "sub_comments": []
+      },
+      {
+        "content": "杭州西湖景区，靠近断桥那边",
+        "likes": 23,
+        "sub_comments": []
+      },
+      {
+        "content": "交通方便吗？",
+        "likes": 12,
+        "sub_comments": []
+      }
+    ],
+    "crawl_time": "2026-03-12T22:09:32.741873"
+  },
+  {
+    "title": "成都这家火锅店绝了🔥",
+    "content": "位置在春熙路附近，具体地址是锦江区 XX 路 XX 号。怎么去？地铁 2 号线春熙路站。",
+    "author": {
+      "name": "吃货小王",
+      "ip_location": "四川"
+    },
+    "link": "https://www.xiaohongshu.com/explore/def456",
+    "likes": 8930,
+    "comments_count": 156,
+    "comments": [
+      {
+        "content": "求具体位置",
+        "likes": 30,
+        "sub_comments": []
+      },
+      {
+        "content": "这家餐厅值得打卡！",
+        "likes": 18,
+        "sub_comments": []
+      }
+    ],
+    "crawl_time": "2026-03-12T22:09:32.741895"
+  }
+]

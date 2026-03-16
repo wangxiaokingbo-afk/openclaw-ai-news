@@ -1,0 +1,44 @@
+{
+  "lastPush": {
+    "timestamp": "2026-03-15T23:30:00+08:00",
+    "type": "test-push-2330",
+    "reportFile": "reports/hot-news-2026-03-15-2330-test.md",
+    "targetGroup": "cidwdUjqhs0Pc+p2nKu4pHyVQ==",
+    "itemCount": 10,
+    "status": "success"
+  },
+  "pushHistory": [
+    {
+      "timestamp": "2026-03-15T23:30:00+08:00",
+      "type": "test-push-2330",
+      "reportFile": "reports/hot-news-2026-03-15-2330-test.md",
+      "targetGroup": "cidwdUjqhs0Pc+p2nKu4pHyVQ==",
+      "itemCount": 10,
+      "status": "success",
+      "topItems": [
+        "Ageless Linux 登顶 Hacker News",
+        "Spotify AI DJ 遭遇口碑崩盘",
+        "Palantir Maven：AI 驱动的杀人看板",
+        "H-1B 签证费暴涨至 10 万美元",
+        "Netflix 6 亿美元收购本·阿弗莱克 AI 公司"
+      ]
+    }
+  ],
+  "config": {
+    "scheduledPushes": [
+      {
+        "time": "23:30",
+        "timezone": "Asia/Shanghai",
+        "enabled": true,
+        "type": "test"
+      }
+    ],
+    "defaultItemCount": 10,
+    "sources": [
+      "Hacker News",
+      "The Verge",
+      "X Platform",
+      "News Minimalist"
+    ]
+  }
+}

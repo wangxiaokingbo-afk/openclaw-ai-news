@@ -1,0 +1,59 @@
+[2026-03-08 16:06:19] === 开始尝试安装 skills ===
+[2026-03-08 16:06:19] 尝试安装：openclaw-tavily-search
+- Resolving openclaw-tavily-search
+✖ Rate limit exceeded
+Error: Rate limit exceeded
+[2026-03-08 16:06:25] ❌ openclaw-tavily-search 安装失败（速率限制或其他错误）
+[2026-03-08 16:06:25] 尝试安装：find-skills
+- Resolving find-skills
+✖ Rate limit exceeded
+Error: Rate limit exceeded
+[2026-03-08 16:06:31] ❌ find-skills 安装失败（速率限制或其他错误）
+[2026-03-08 16:06:31] === 本次尝试结束，20 分钟后再次尝试 ===
+[2026-03-08 16:26:31] === 开始尝试安装 skills ===
+[2026-03-08 16:26:31] 尝试安装：openclaw-tavily-search
+- Resolving openclaw-tavily-search
+✖ Rate limit exceeded
+Error: Rate limit exceeded
+[2026-03-08 16:26:37] ❌ openclaw-tavily-search 安装失败（速率限制或其他错误）
+[2026-03-08 16:26:37] 尝试安装：find-skills
+- Resolving find-skills
+✖ Rate limit exceeded
+Error: Rate limit exceeded
+[2026-03-08 16:26:43] ❌ find-skills 安装失败（速率限制或其他错误）
+[2026-03-08 16:26:43] === 本次尝试结束，20 分钟后再次尝试 ===
+[2026-03-08 16:46:43] === 开始尝试安装 skills ===
+[2026-03-08 16:46:43] 尝试安装：openclaw-tavily-search
+- Resolving openclaw-tavily-search
+✖ Rate limit exceeded
+Error: Rate limit exceeded
+[2026-03-08 16:46:49] ❌ openclaw-tavily-search 安装失败（速率限制或其他错误）
+[2026-03-08 16:46:49] 尝试安装：find-skills
+- Resolving find-skills
+✖ Rate limit exceeded
+Error: Rate limit exceeded
+[2026-03-08 16:46:54] ❌ find-skills 安装失败（速率限制或其他错误）
+[2026-03-08 16:46:54] === 本次尝试结束，20 分钟后再次尝试 ===
+[2026-03-08 17:06:54] === 开始尝试安装 skills ===
+[2026-03-08 17:06:54] 尝试安装：openclaw-tavily-search
+- Resolving openclaw-tavily-search
+✖ Rate limit exceeded
+Error: Rate limit exceeded
+[2026-03-08 17:07:01] ❌ openclaw-tavily-search 安装失败（速率限制或其他错误）
+[2026-03-08 17:07:01] 尝试安装：find-skills
+- Resolving find-skills
+✖ Rate limit exceeded
+Error: Rate limit exceeded
+[2026-03-08 17:07:07] ❌ find-skills 安装失败（速率限制或其他错误）
+[2026-03-08 17:07:07] === 本次尝试结束，20 分钟后再次尝试 ===
+[2026-03-08 17:27:07] === 开始尝试安装 skills ===
+[2026-03-08 17:27:07] 尝试安装：openclaw-tavily-search
+- Resolving openclaw-tavily-search
+✔ OK. Installed openclaw-tavily-search -> /Users/ssd/.openclaw/workspace/skills/openclaw-tavily-search
+[2026-03-08 17:27:14] ✅ openclaw-tavily-search 安装成功！
+[2026-03-08 17:27:14] 尝试安装：find-skills
+- Resolving find-skills
+✖ Rate limit exceeded
+Error: Rate limit exceeded
+[2026-03-08 17:27:20] ❌ find-skills 安装失败（速率限制或其他错误）
+[2026-03-08 17:27:20] === 本次尝试结束，20 分钟后再次尝试 ===

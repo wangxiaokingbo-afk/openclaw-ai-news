@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw 多 Agent 配置方案 V3.0</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        .container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1 { color: #1a73e8; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-bottom: 30px; }
+        h2 { color: #333; margin: 30px 0 15px; padding-left: 10px; border-left: 4px solid #1a73e8; }
+        h3 { color: #555; margin: 20px 0 10px; }
+        .conclusion { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 8px; margin-bottom: 30px; }
+        .conclusion h2 { color: white; border-left: none; margin-top: 0; }
+        .conclusion ul { margin-left: 20px; }
+        .conclusion li { margin: 8px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; text-align: left; border: 1px solid #ddd; }
+        th { background: #f8f9fa; font-weight: 600; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .code-block { background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Consolas', monospace; font-size: 13px; margin: 15px 0; }
+        .code-block .comment { color: #75715e; }
+        .code-block .string { color: #a6e22e; }
+        .code-block .keyword { color: #66d9ef; }
+        .tree { font-family: monospace; background: #f8f9fa; padding: 15px; border-radius: 6px; margin: 15px 0; line-height: 1.8; }
+        .highlight { background: #fff3cd; padding: 2px 6px; border-radius: 3px; }
+        .warning { background: #f8d7da; border-left: 4px solid #dc3545; padding: 15px; margin: 15px 0; }
+        .success { background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0; }
+        .workflow { background: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .workflow-arrow { text-align: center; color: #1a73e8; font-size: 20px; margin: 5px 0; }
+        ul, ol { margin-left: 25px; margin-bottom: 15px; }
+        li { margin: 8px 0; }
+        .checklist { list-style: none; margin-left: 0; }
+        .checklist li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .checklist li:before { content: "☐ "; color: #667eea; }
+        footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 14px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍊 OpenClaw 多 Agent 配置方案 V3.0</h1>
+        
+        <div class="conclusion">
+            <h2>📌 核心结论</h2>
+            <ul>
+                <li><strong>单一入口</strong>：钉钉消息只到 Coordinator（小橙），其他 Agent 不直接对外</li>
+                <li><strong>完全隔离</strong>：每个 Agent 独立 workspace，上下文零污染</li>
+                <li><strong>双层记忆</strong>：角色记忆（各自 workspace）+ 团队工件（shared/共享）</li>
+                <li><strong>流程闭环</strong>：Coordinator 统一调度 → Researcher/Builder 执行 → Reviewer 验收 → Coordinator 收口</li>
+                <li><strong>小橙零影响</strong>：现有 workspace 保持不变，仅增加调度能力</li>
+            </ul>
+        </div>
+
+        <h2>一、架构设计</h2>
+        <div class="tree">
+~/.openclaw/<br>
+├── openclaw.json              <span class="highlight"># 主配置（共享 gateway/channel）</span><br>
+├── shared/                    <span class="highlight"># 团队共享工件</span><br>
+│   ├── TASK_BOARD.md<br>
+│   ├── DECISIONS.md<br>
+│   ├── RESEARCH_LOG.md<br>
+│   ├── IMPLEMENTATION_LOG.md<br>
+│   ├── REVIEW_LOG.md<br>
+│   └── HANDOFFS/<br>
+├── workspace/                 <span class="highlight"># 小橙 (Coordinator) 主工作区【保持不变】</span><br>
+│   └── AGENTS.md, SOUL.md, USER.md, TOOLS.md, MEMORY.md, memory/<br>
+├── workspace-researcher/      <span class="highlight"># Researcher 独立工作区</span><br>
+│   └── AGENTS.md, SOUL.md, USER.md, TOOLS.md, MEMORY.md, memory/<br>
+├── workspace-builder/         <span class="highlight"># Builder 独立工作区</span><br>
+│   └── AGENTS.md, SOUL.md, USER.md, TOOLS.md, MEMORY.md, memory/<br>
+└── workspace-reviewer/        <span class="highlight"># Reviewer 独立工作区</span><br>
+    └── AGENTS.md, SOUL.md, USER.md, TOOLS.md, MEMORY.md, memory/
+        </div>
+
+        <h2>二、核心配置</h2>
+        
+        <h3>2.1 openclaw.json 配置</h3>
+        <div class="code-block">
+{
+  <span class="keyword">"channel"</span>: {
+    <span class="string">"provider"</span>: <span class="string">"dingtalk"</span>,
+    <span class="string">"webhook"</span>: <span class="string">"你的钉钉 webhook"</span>
+  },
+  <span class="keyword">"gateway"</span>: {
+    <span class="string">"enabled"</span>: <span class="keyword">true</span>
+  },
+  <span class="keyword">"agents"</span>: {
+    <span class="string">"coordinator"</span>: {
+      <span class="string">"workspace"</span>: <span class="string">"./workspace"</span>,
+      <span class="string">"binding"</span>: <span class="string">"default"</span>
+    },
+    <span class="string">"researcher"</span>: {
+      <span class="string">"workspace"</span>: <span class="string">"./workspace-researcher"</span>,
+      <span class="string">"binding"</span>: <span class="string">"coordinator"</span>
+    },
+    <span class="string">"builder"</span>: {
+      <span class="string">"workspace"</span>: <span class="string">"./workspace-builder"</span>,
+      <span class="string">"binding"</span>: <span class="string">"coordinator"</span>
+    },
+    <span class="string">"reviewer"</span>: {
+      <span class="string">"workspace"</span>: <span class="string">"./workspace-reviewer"</span>,
+      <span class="string">"binding"</span>: <span class="string">"coordinator"</span>
+    }
+  }
+}
+        </div>
+
+        <h3>2.2 工具权限与 Sandbox 策略</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Agent</th>
+                    <th>Sandbox</th>
+                    <th>exec</th>
+                    <th>browser</th>
+                    <th>职责边界</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Coordinator</strong></td>
+                    <td>off</td>
+                    <td>✅</td>
+                    <td>✅</td>
+                    <td>调度、汇总、不深度实现</td>
+                </tr>
+                <tr>
+                    <td><strong>Researcher</strong></td>
+                    <td>on</td>
+                    <td>⚠️</td>
+                    <td>✅</td>
+                    <td>查证、不拍板、不改代码</td>
+                </tr>
+                <tr>
+                    <td><strong>Builder</strong></td>
+                    <td>on</td>
+                    <td>✅</td>
+                    <td>❌</td>
+                    <td>实现、不猜 API、不扩 scope</td>
+                </tr>
+                <tr>
+                    <td><strong>Reviewer</strong></td>
+                    <td>on</td>
+                    <td>❌</td>
+                    <td>❌</td>
+                    <td>验收、不重做实现</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>三、协作流程</h2>
+        <div class="workflow">
+            <div style="text-align: center; font-weight: 600; font-size: 18px;">用户 → Coordinator (小橙)</div>
+            <div class="workflow-arrow">↓</div>
+            <div style="display: flex; justify-content: center; gap: 40px;">
+                <div>Researcher<br><span style="font-size: 12px; color: #666;">(信息不足时)</span></div>
+                <div>Builder<br><span style="font-size: 12px; color: #666;">(目标清晰时)</span></div>
+            </div>
+            <div class="workflow-arrow">↓</div>
+            <div style="text-align: center;">Reviewer</div>
+            <div class="workflow-arrow">↓</div>
+            <div style="text-align: center; font-weight: 600;">Coordinator → 用户</div>
+        </div>
+
+        <h3>标准闭环</h3>
+        <ol>
+            <li><strong>Coordinator</strong> 接需求 → 拆解任务</li>
+            <li>信息不足 → 派 <strong>Researcher</strong> 查证</li>
+            <li>目标清晰 → 派 <strong>Builder</strong> 实现</li>
+            <li>完成后 → 交 <strong>Reviewer</strong> 验收</li>
+            <li><strong>Reviewer</strong> 返回结论 → <strong>Coordinator</strong> 决定：
+                <ul>
+                    <li>✅ <strong>Accept</strong>（完成）</li>
+                    <li>🔄 <strong>Revise</strong>（修改）</li>
+                    <li>⚠️ <strong>Escalate</strong>（升级/补研/人工决策）</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>四、双层记忆设计</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>层级</th>
+                    <th>位置</th>
+                    <th>内容</th>
+                    <th>访问范围</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>角色记忆</strong></td>
+                    <td>各 workspace/MEMORY.md</td>
+                    <td>常用偏好、角色经验、任务习惯、稳定规则</td>
+                    <td>仅本 Agent</td>
+                </tr>
+                <tr>
+                    <td><strong>团队工件</strong></td>
+                    <td>shared/ 目录</td>
+                    <td>当前目标、状态、决策、查证结论、实施改动、审查结果</td>
+                    <td>所有 Agent 可读</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>五、共享工件模板</h2>
+        
+        <h3>5.1 TASK_BOARD.md</h3>
+        <div class="code-block">
+# Goal
+# Constraints
+# Backlog
+# In Progress
+# Review
+# Blocked
+# Done
+# Next action
+# Owner
+        </div>
+
+        <h3>5.2 DECISIONS.md</h3>
+        <div class="code-block">
+# Decisions
+
+## YYYY-MM-DD
+- decision
+- why
+- impact
+        </div>
+
+        <h3>5.3 HANDOFFS/README.md</h3>
+        <div class="code-block">
+# Handoffs
+
+Each handoff should record:
+- from / to
+- task / current state
+- blockers / expected output
+- related files
+        </div>
+
+        <h2>六、小橙 (Coordinator) 保障措施</h2>
+        <div class="success">
+            <strong>✅ 你的使用状态完全不受影响：</strong>
+            <ul>
+                <li><strong>入口唯一</strong>：所有钉钉消息只到你这里，其他 Agent 不直接对外</li>
+                <li><strong>工作区独立</strong>：你的 <code>./workspace</code> 保持原样，不与其他 Agent 混用</li>
+                <li><strong>调度权</strong>：你决定何时调用哪个 Agent，调用顺序由你控制</li>
+                <li><strong>收口权</strong>：所有结果汇总到你这里，由你统一回复用户</li>
+                <li><strong>记忆独立</strong>：你的 MEMORY.md 只记录你的决策和上下文，不被污染</li>
+            </ul>
+        </div>
+
+        <h2>七、安全规则</h2>
+        <div class="warning">
+            <strong>⚠️ 10 轮失败挂起规则：</strong>
+            <p>同一任务 unresolved 超过 10 轮 → 暂停、记录 attempts/errors/blockers、上报人工决策，禁止无限循环试错。</p>
+        </div>
+
+        <h2>八、实施清单</h2>
+        <ul class="checklist">
+            <li>创建 <code>shared/</code> 目录及 6 个模板文件</li>
+            <li>创建 <code>workspace-researcher/</code>、<code>workspace-builder/</code>、<code>workspace-reviewer/</code></li>
+            <li>为每个 Agent 配置 SOUL.md、AGENTS.md、TOOLS.md</li>
+            <li>更新 <code>openclaw.json</code> 添加多 agent 路由配置</li>
+            <li>配置 per-agent 工具权限与 sandbox 策略</li>
+            <li>测试 Coordinator → Researcher/Builder/Reviewer 调度链路</li>
+        </ul>
+
+        <footer>
+            <p>🍊 小橙 | 生成时间：2026-03-10 | 方案版本：V3.0</p>
+        </footer>
+    </div>
+</body>
+</html>

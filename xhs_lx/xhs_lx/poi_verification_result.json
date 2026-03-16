@@ -1,0 +1,29 @@
+[
+  {
+    "poi_name": "杭州西湖景区",
+    "poi_address": "",
+    "city": "杭州",
+    "heat": 23.0,
+    "exists": "存在",
+    "matched_name": "杭州西湖景区",
+    "similarity": 0.8
+  },
+  {
+    "poi_name": "附近，具体地址是锦江区",
+    "poi_address": "",
+    "city": "成都",
+    "heat": 9710.0,
+    "exists": "存在",
+    "matched_name": "附近具体地址是锦江区",
+    "similarity": 0.8
+  },
+  {
+    "poi_name": "这家餐厅",
+    "poi_address": "",
+    "city": "未知",
+    "heat": 18.0,
+    "exists": "缺失",
+    "matched_name": null,
+    "similarity": 0
+  }
+]
