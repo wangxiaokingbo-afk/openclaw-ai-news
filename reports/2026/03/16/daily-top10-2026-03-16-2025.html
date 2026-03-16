@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 热点资讯 Top 10</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; min-height: 100vh; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header p { font-size: 1.2em; opacity: 0.9; }
+        .content { padding: 40px; }
+        .item { background: #fff; border: 1px solid #e0e0e0; border-radius: 15px; padding: 25px; margin-bottom: 20px; transition: transform 0.2s, box-shadow 0.2s; }
+        .item:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .item h3 { color: #333; font-size: 1.3em; margin-bottom: 15px; display: flex; align-items: center; }
+        .item h3 .badge { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8em; margin-right: 10px; }
+        .item .points { background: #f0f4ff; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .item .points strong { color: #667eea; }
+        .item .comment { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); padding: 15px; border-radius: 10px; border-left: 4px solid #f5576c; }
+        .item .comment strong { color: #d63384; }
+        .item .comment p { font-style: italic; color: #555; line-height: 1.8; }
+        .footer { background: #f8f9fa; padding: 30px 40px; text-align: center; color: #666; border-top: 1px solid #e0e0e0; }
+        .footer a { color: #667eea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .tag { display: inline-block; padding: 3px 10px; border-radius: 15px; font-size: 0.75em; margin-left: 10px; }
+        .tag-ai { background: #e0f2fe; color: #0369a1; }
+        .tag-energy { background: #dcfce7; color: #15803d; }
+        .tag-finance { background: #fef3c7; color: #b45309; }
+        .tag-politics { background: #fee2e2; color: #b91c1c; }
+        @media (max-width: 768px) { .header h1 { font-size: 1.8em; } .content { padding: 20px; } .item h3 { font-size: 1.1em; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 热点资讯 Top 10</h1>
+            <p>{{DATE}}</p>
+        </div>
+        
+        <div class="content">
+            {{ITEMS}}
+        </div>
+
+        <div class="footer">
+            <p><strong>数据来源：</strong>X 平台 (40%) | News Minimalist (30%) | Google 搜索 (20%) | YouTube (10%)</p>
+            <p><strong>内容分布：</strong>AI 50% | 新能源 30% | 商业金融 10% | 社会政治 10%</p>
+            <p style="margin-top: 20px;"><em>报告由 贾维斯 (J.A.R.V.I.S.) 生成</em></p>
+        </div>
+    </div>
+</body>
+</html>
