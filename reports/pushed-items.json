@@ -1,6 +1,30 @@
 {
-  "lastPush": "2026-03-16T02:30:00+08:00",
+  "lastPush": "2026-03-17T12:00:00+08:00",
   "items": [
+    {
+      "id": "daily-top10-2026-03-17-1200",
+      "title": "每日热点 Top 10 - 2026 年 3 月 17 日 午报",
+      "timestamp": "2026-03-17T12:00:00+08:00",
+      "mdFile": "daily-top10-2026-03-17-1200.md",
+      "htmlFile": "daily-top10-2026-03-17-1200.html",
+      "categories": {
+        "ai": 5,
+        "energy": 3,
+        "finance": 1,
+        "politics": 1
+      },
+      "sources": {
+        "xPlatform": "60%",
+        "newsMinimalist": "skipped (Vercel security)",
+        "googleSearch": "N/A",
+        "youtube": "N/A"
+      },
+      "topStories": [
+        "Elon Musk: AI 发展速度将远超任何人预期",
+        "提示词工程只是 AI 工程师的入门技能 (193K 浏览)",
+        "Trump 指控美国媒体因伊朗 AI 深度伪造犯叛国罪 (176K 讨论)"
+      ]
+    },
     {
       "id": "hot-news-2026-03-16-0230",
       "title": "热点资讯 Top 10 - 2026 年 3 月 16 日 02:30",
@@ -26,5 +50,5 @@
       ]
     }
   ],
-  "totalPushes": 1
+  "totalPushes": 2
 }
