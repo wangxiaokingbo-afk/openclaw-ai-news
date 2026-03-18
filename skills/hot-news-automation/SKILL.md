@@ -319,3 +319,27 @@ reports/
 ---
 
 *本 Skill 由 贾维斯 (J.A.R.V.I.S.) 维护 · 最后更新：2026-03-15*
+
+---
+
+## ⚠️ 重大错误反思 (2026-03-18)
+
+### 错误 5：严重违反数据源规范
+
+**症状：** 完全未使用 SKILL.md 指定的数据源，抓取了禁止的网站
+
+**原因：** 
+- 未使用 X 平台 (chrome profile, @wang9067 登录)
+- 未使用 News Minimalist (https://www.newsminimalist.com)
+- 未使用 Google 搜索 (web_search)
+- 未使用 YouTube trending
+- ❌ 使用了用户明确禁止的 The Verge
+- ❌ 随意抓取 Electrek、CNBC、AP News、Ars Technica 等未授权网站
+
+**避免方法：** 
+- 每次执行前必须重新阅读 SKILL.md 数据源规范
+- 严格按照 40/30/20/10 权重分配数据源
+- 禁止使用 SKILL.md 明确禁止的网站
+- 平台异常时在报告中红色警告，而不是跳过或替换
+
+**记住：** 数据源规范是硬性要求，不是建议！

@@ -1,15 +1,1 @@
-{
-  "pushedItems": [
-    {"fingerprint": "2026-03-18-1025-001", "title": "英伟达 CEO：OpenClaw 是下一个 ChatGPT", "category": "AI", "pushed_at": "2026-03-18T10:25:00+08:00"},
-    {"fingerprint": "2026-03-18-1025-002", "title": "英伟达推出 NemoClaw", "category": "AI", "pushed_at": "2026-03-18T10:25:00+08:00"},
-    {"fingerprint": "2026-03-18-1025-003", "title": "OpenAI 战略收缩", "category": "AI", "pushed_at": "2026-03-18T10:25:00+08:00"},
-    {"fingerprint": "2026-03-18-1025-004", "title": "黄仁勋回应 DLSS 5 争议", "category": "AI", "pushed_at": "2026-03-18T10:25:00+08:00"},
-    {"fingerprint": "2026-03-18-1025-005", "title": "AI 几乎杀死 BuzzFeed", "category": "AI", "pushed_at": "2026-03-18T10:25:00+08:00"},
-    {"fingerprint": "2026-03-18-1025-006", "title": "电动汽车削减石油需求", "category": "新能源", "pushed_at": "2026-03-18T10:25:00+08:00"},
-    {"fingerprint": "2026-03-18-1025-007", "title": "固态电池 800 英里续航", "category": "新能源", "pushed_at": "2026-03-18T10:25:00+08:00"},
-    {"fingerprint": "2026-03-18-1025-008", "title": "中国风电光伏废弃物", "category": "新能源", "pushed_at": "2026-03-18T10:25:00+08:00"},
-    {"fingerprint": "2026-03-18-1025-009", "title": "日本出口超预期", "category": "金融", "pushed_at": "2026-03-18T10:25:00+08:00"},
-    {"fingerprint": "2026-03-18-1025-010", "title": "伊朗发射导弹报复", "category": "政治", "pushed_at": "2026-03-18T10:25:00+08:00"}
-  ],
-  "lastUpdate": "2026-03-18T10:25:00+08:00"
-}
+/Users/ssd/.openclaw/agents/main/config/pushed-items.json

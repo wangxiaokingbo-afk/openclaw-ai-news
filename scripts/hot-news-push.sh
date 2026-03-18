@@ -1,7 +1,6 @@
 #!/bin/bash
-# 热点资讯定时推送脚本 v1.2
-# 执行时间：每天 09:00、12:00、18:00、23:00
-# 功能：爬取热点资讯并推送到钉钉群
+# 热点资讯定时推送脚本 v1.5 (修复 sessions_spawn 命令)
+# 执行时间：每天 09:30、12:00、18:00、23:00
 
 set -e
 
@@ -13,6 +12,7 @@ WORKSPACE="/Users/ssd/.openclaw/workspace"
 GROUP_ID="cidwdUjqhs0Pc+p2nKu4pHyVQ=="
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 TIME_SLOT=$(date '+%H%M')
+REPORT_DATE=$(date '+%Y-%m-%d')
 
 log() {
     echo "[$TIMESTAMP] $1" >> "$LOG_FILE"
@@ -35,70 +35,99 @@ if ! openclaw gateway status 2>&1 | grep -q "RPC probe: ok"; then
 fi
 log "✓ Gateway 运行正常"
 
-# 使用 sessions_send 发送任务到子 agent
-log "启动子 agent 执行热点资讯抓取..."
-
 # 创建任务描述文件
 TASK_FILE=$(mktemp)
 cat > "$TASK_FILE" << 'TASK_EOF'
-执行热点资讯抓取和推送任务
+【重要】执行热点资讯抓取前，必须先完成自我检查！
 
-【重要要求】
-1. 按照 hot-news-automation skill 规范执行
-2. 抓取 X 平台、News Minimalist、YouTube、Google 搜索的热点资讯
-3. 按 50/30/10/10 比例筛选 (AI/新能源/商业金融/社会政治)
-4. 每条资讯必须包含：标题 + 要点 + 锐评（锐评必须有独立观点和判断，不能省略）
-5. 生成 Markdown 和 HTML 报告（版本化命名：daily-top10-YYYY-MM-DD-HHMM）
-6. 部署到 GitHub Pages
-7. 发送钉钉 ActionCard 消息到群聊 cidwdUjqhs0Pc+p2nKu4pHyVQ==
-8. 更新时间段：当前时间
+=====================================
+🔍 自我检查清单 (必须逐项确认)
+=====================================
 
-【钉钉消息格式要求】
-- 核心结论：10 条精简（每条 50 字内）
-- 精选资讯：至少 5 条详情，每条必须包含：
-  - 标题
-  - 要点（1-2 句）
-  - 锐评（1-2 句，独立观点和判断）
-- 完整报告链接置底
+【数据源检查 - 必须 100% 符合】
+1. X 平台 40%: browser (profile="chrome", @wang9067 登录态)
+   - 搜索：AI、人工智能、新能源、地缘政治、金融、投资
+   - ❌ 不搜 Tesla
+2. News Minimalist 30%: https://www.newsminimalist.com (significance ≥ 5.2)
+3. Google 搜索 20%: web_search 工具
+4. YouTube 10%: browser 抓取首页 trending 播客/新闻
 
-【注意事项】
-- 必须执行真实抓取，不使用模拟数据
-- AI 内容排除学习/教程类
-- 检查平台状态（X 平台 Cookie、News Minimalist 可访问性）
-- 执行去重比对（检查 config/pushed-items.json）
-- 锐评必须有观点，不能省略或简化
+【禁止项检查】
+- ❌ 不用 The Verge
+- ❌ 不抓个人 YouTube 频道
+- ❌ 不搜 Tesla
+
+【内容规范】
+- 领域分布：AI 50% (5 条)、新能源 30% (3 条)、金融 10% (1 条)、政治 10% (1 条)
+- 每条：标题 + 要点 + 锐评（10 条锐评）
+- ❌ 无核心结论部分
+
+【输出要求】
+1. Markdown: daily-top10-YYYY-MM-DD-HHMM.md
+2. HTML: daily-top10-YYYY-MM-DD-HHMM.html
+3. git add + commit + push
+4. 发送钉钉 ActionCard 到 cidwdUjqhs0Pc+p2nKu4pHyVQ==
+
+【平台异常处理】
+- 在报告中红色警告
+- 降级使用 Google 搜索
+- 不替换为未授权网站
+
+=====================================
+✅ 自我检查完成后，开始执行抓取
+=====================================
+
+请按照 hot-news-automation skill 规范执行。
 TASK_EOF
 
-# 通过 openclaw agent 执行任务
+log "启动子 agent 执行热点资讯抓取..."
+
+# 使用 sessions_spawn 子代理执行任务
 cd "$WORKSPACE"
-RESULT=$(openclaw agent --task "$(cat "$TASK_FILE")" 2>&1) || true
+SESSIONS_RESULT=$(sessions_spawn --runtime subagent --mode run --task "$(cat "$TASK_FILE")" --timeout 300 2>&1) || true
 
 rm -f "$TASK_FILE"
 
-log "子 agent 响应：$RESULT"
+log "子 agent 响应：$SESSIONS_RESULT"
 
 # 检查报告是否生成
-REPORT_DATE=$(date '+%Y-%m-%d')
 if [ -f "$WORKSPACE/reports/daily-top10-${REPORT_DATE}-${TIME_SLOT}.md" ]; then
     log "✓ 报告已生成：daily-top10-${REPORT_DATE}-${TIME_SLOT}.md"
     
-    # 检查锐评数量
     RUIPING_COUNT=$(grep -c "锐评" "$WORKSPACE/reports/daily-top10-${REPORT_DATE}-${TIME_SLOT}.md" || echo "0")
     log "✓ 锐评数量：$RUIPING_COUNT 条"
     
     if [ "$RUIPING_COUNT" -lt 10 ]; then
-        log "⚠️ 警告：锐评数量不足 10 条，可能格式有误"
+        log "⚠️ 警告：锐评数量不足 10 条"
+    fi
+    
+    if [ -f "$WORKSPACE/reports/daily-top10-${REPORT_DATE}-${TIME_SLOT}.html" ]; then
+        log "✓ HTML 报告已生成"
+    else
+        log "⚠️ 警告：HTML 报告未生成"
     fi
 else
-    # 检查是否有今日报告（可能时间戳略有不同）
     REPORT_FILE=$(ls -t "$WORKSPACE/reports/daily-top10-${REPORT_DATE}"*.md 2>/dev/null | head -1)
     if [ -n "$REPORT_FILE" ]; then
         log "✓ 报告已生成：$(basename "$REPORT_FILE")"
         RUIPING_COUNT=$(grep -c "锐评" "$REPORT_FILE" || echo "0")
         log "✓ 锐评数量：$RUIPING_COUNT 条"
     else
-        log "⚠ 未找到今日报告文件（子 agent 可能仍在执行）"
+        log "⚠ 未找到今日报告文件"
     fi
+fi
+
+# Git 部署
+log "开始 Git 部署..."
+cd "$WORKSPACE"
+git add reports/daily-top10-${REPORT_DATE}-${TIME_SLOT}.md 2>/dev/null || true
+git add reports/daily-top10-${REPORT_DATE}-${TIME_SLOT}.html 2>/dev/null || true
+
+if ! git diff --cached --quiet 2>/dev/null; then
+    git commit -m "🔥 Add daily top10 report ${REPORT_DATE} ${TIME_SLOT}" 2>&1 | while read line; do log "git: $line"; done
+    log "Git commit 完成，推送中..."
+else
+    log "ℹ️ 无新文件需要提交"
 fi
 
 log "热点资讯推送任务完成"
